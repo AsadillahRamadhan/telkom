@@ -13,7 +13,8 @@ class LogController extends Controller
     public function index()
     {
         return view('log.index', [
-            'peminjamans' => Log::all()
+            'peminjamans' => Log::all(),
+            'title' => 'Log Peminjaman'
         ]);
     }
 

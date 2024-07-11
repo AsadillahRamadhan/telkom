@@ -11,12 +11,12 @@
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <label for="nama">Nama</label>
-                <input type="text" name="nama" id="nama" class="form-control" required>
+                <label for="uuid">UUID</label>
+                <input type="text" name="uuid" id="uuid" class="form-control" required>
               </div>
               <div class="form-group">
-                <label for="stok">Stok</label>
-                <input type="number" name="stok" id="stok" class="form-control" required>
+                <label for="nama">Nama</label>
+                <input type="text" name="nama" id="nama" class="form-control" required>
               </div>
               <div class="form-group">
                 <label for="jenis">Jenis</label>
@@ -43,18 +43,20 @@
         <table class="table table-striped text-center">
             <thead>
                 <tr>
+                    <th>UUID</th>
                     <th>Nama</th>
                     <th>Jenis</th>
-                    <th>Stok</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($perangkats as $perangkat)
                 <tr>
+                  <td>{{ $perangkat->uuid }}</td>
                     <td>{{ $perangkat->nama }}</td>
                     <td>{{ $perangkat->jenis }}</td>
-                    <td>{{ $perangkat->stok }}</td>
+                    <td>{{ $perangkat->status ? 'TERSEDIA' : 'TIDAK TERSEDIA' }}</td>
                     <td>
                         <form action="{{ url("/perangkat/$perangkat->id") }}" method="POST">
                             @method('DELETE')
@@ -62,35 +64,10 @@
                             <button type="submit" class="btn btn-danger">
                                 Delete
                             </button>
-                            <button class="btn btn-info" type="button" data-bs-toggle="modal" data-bs-target="#addStok{{ $perangkat->id }}">Tambah Stok</button>
                         </form>
                         
                     </td>
                 </tr>
-                <form action="{{ url("perangkat/$perangkat->id") }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal fade" id="addStok{{ $perangkat->id }}" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h1 class="modal-title fs-5"">Add Stok {{ $perangkat->nama }}</h1>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              <div class="form-group">
-                                <label for="stok">Stok Tambahan</label>
-                                <input type="number" name="stok" id="stok" class="form-control" required>
-                              </div>
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                </form>
                 @endforeach
             </tbody>
         </table>

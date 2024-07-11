@@ -14,12 +14,10 @@ return new class extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->string('nama');
             $table->unsignedBigInteger('perangkat_id');
             $table->dateTime('jam_masuk');
             $table->dateTime('jam_keluar')->nullable();
-            $table->integer('jumlah');
-            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('perangkat_id')->references('id')->on('perangkats');
             $table->timestamps();
         });

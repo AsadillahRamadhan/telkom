@@ -17,8 +17,9 @@ class PeminjamanController extends Controller
     public function index()
     {
         return view('peminjaman.index', [
-            'peminjamans' => Log::where('user_id', Auth::user()->id)->get(),
-            'perangkats' => Perangkat::where('stok', '>', 0)->get()
+            'peminjamans' => Log::all(),
+            'perangkats' => Perangkat::where('status', true)->get(),
+            'title' => 'Log Peminjaman'
         ]);
     }
 

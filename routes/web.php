@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LogController;
+use App\Http\Controllers\LogOpenController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PerangkatController;
 use App\Http\Controllers\UserController;
@@ -14,16 +15,13 @@ Auth::routes();
 
 Route::middleware(Authenticate::class)->group(function(){
     Route::get('/', function () {
-        return view('welcome');
+        return redirect()->route('perangkat.index');   
     });
-
-    Route::middleware(AdminMiddleware::class)->group(function(){
-        Route::resource('user', UserController::class);
-    });
-
+    // Route::resource('user', UserController::class);
     Route::resource('perangkat', PerangkatController::class);
-    Route::resource('peminjaman', PeminjamanController::class);
+    // Route::resource('peminjaman', PeminjamanController::class);
     Route::resource('log', LogController::class);
+    Route::resource('log-akses', LogOpenController::class);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

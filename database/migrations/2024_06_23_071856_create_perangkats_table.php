@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('perangkats', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->string('uuid');
             $table->enum('jenis', ['AVOMETER', 'TANG METER', 'GROUNDING TESTER']);
-            $table->integer('stok');
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

@@ -13,7 +13,8 @@ class PerangkatController extends Controller
     public function index()
     {
         return view('perangkat.index', [
-            'perangkats' => Perangkat::all()
+            'perangkats' => Perangkat::all(),
+            'title' => 'Perangkat'
         ]);
     }
 
@@ -31,8 +32,8 @@ class PerangkatController extends Controller
     public function store(Request $request)
     {
         Perangkat::create([
+            'uuid' => $request->post('uuid'),
             'nama' => $request->post('nama'),
-            'stok' => $request->post('stok'),
             'jenis' => $request->post('jenis')
         ]);
 
