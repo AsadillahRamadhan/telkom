@@ -14,9 +14,6 @@ class OpenController extends Controller
 {
     public function open(Request $request){
         $file = $request->file('file');
-        $fileName = time() . '_' . $file->getClientOriginalName();
-        $filePath = $file->storeAs('photos', $fileName, 'public');
-
 
         $client = new Client();
         $response = $client->request('POST', 'http://127.0.0.1:5000/predict', [
@@ -30,8 +27,9 @@ class OpenController extends Controller
         ]);
 
         $responseBody = json_decode($response->getBody(), true);
-
         if($responseBody['result'] != null){
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $filePath = $file->storeAs('photos', $fileName, 'public');
             OpenLog::create([
                 'nama' => $responseBody['result'],
                 'jam' => Carbon::now()->format('Y-m-d H:i:s'),

@@ -15,7 +15,7 @@
                 <tr>
                     <td>{{ $log->nama }}</td>
                     <td>{{ $log->jam }}</td>
-                    <td><img src="{{ asset('/' . $log->link_foto) }}" alt="{{ $log->nama }}"></td>
+                    <td><img width="50" height="50" src="{{ asset('/storage/' . $log->link_foto) }}" alt="{{ $log->nama }}"></td>
                 </tr>
                 @endforeach
             </tbody>

@@ -18,6 +18,12 @@ class LogController extends Controller
         ]);
     }
 
+    public function getData(){
+        $data = Log::with('perangkat')->orderBy('jam_masuk', 'DESC')->get();
+
+        return response()->json($data);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
